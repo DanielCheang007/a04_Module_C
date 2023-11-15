@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<TourAdapter.ViewHolder>() {
     private var sortAsc: Boolean = false
@@ -34,7 +36,11 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tour: Tour = mTours.get(position)
         holder.nameTextView.setText(tour.activityName)
-        holder.dateTextView.setText(tour.activityDate.toString())
+
+        val pattern = "yyyy-MM-dd"
+        val formatter = SimpleDateFormat(pattern)
+        val dateStr = formatter.format(tour.activityDate)
+        holder.dateTextView.setText(dateStr)
 
         holder.itemView.setOnClickListener {
             println("-- here: " + tour.activityName)
