@@ -1,10 +1,14 @@
 package com.example.a04_module_c
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +30,24 @@ class LeftFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.left_fragment, container, false)
+
+        // search tour list
+        val searchFiled = view?.findViewById<EditText>(R.id.searchQuery)
+        searchFiled?.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                println("-- beforeTextChanged " + p0)
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                println("-- onTextChanged " + p0)
+                adapter.search(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+//                println("-- afterTextChanged " + p0)
+            }
+        })
+
 
         // sort the tour list
         val btn = view?.findViewById<Button>(R.id.sortList)

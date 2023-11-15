@@ -11,6 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<TourAdapter.ViewHolder>() {
     private var sortAsc: Boolean = false
 
+    // save a list copy
+    private var oriTours: ArrayList<Tour> = ArrayList<Tour>()
+
+    init {
+        oriTours.clear()
+        oriTours.addAll(mTours)
+    }
+
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView = itemView.findViewById<TextView>(R.id.tourName)
         val dateTextView = itemView.findViewById<TextView>(R.id.tourDate)
@@ -51,6 +59,18 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
         return mTours.size
     }
 
+    public fun search(kw: String) {
+        mTours.clear()
+        if (kw == "") {
+            mTours.addAll(oriTours)
+        } else {
+            val res = oriTours.filter{ it -> it.activityName.contains(kw, ignoreCase = true)}
+            mTours.addAll(res)
+        }
+        
+        notifyDataSetChanged()
+    }
+
     public fun sort(){
         mTours.sortWith(compareBy{ it.activityDate })
         if (sortAsc) {
@@ -68,6 +88,9 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
         mTours.addAll(tours)
         mTours.addAll(tours)
         mTours.addAll(tours)
+
+        oriTours.clear()
+        oriTours.addAll(mTours)
 
         println(mTours.size)
         println("-- notify the change")
