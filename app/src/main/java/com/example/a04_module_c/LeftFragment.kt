@@ -15,6 +15,8 @@ import java.io.IOException
 
 class LeftFragment: Fragment() {
     private val agent = OkHttpClient()
+    private val gson = Gson()
+
     lateinit var adapter: TourAdapter
 
     override fun onCreateView(
@@ -55,29 +57,12 @@ class LeftFragment: Fragment() {
                     println(response)
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
-                    for ((name, value) in response.headers) {
-                        println("$name: $value")
-                    }
-
                     val jsonData: String = response.body?.string().toString()
-                    println(jsonData)
                     val resObj = JSONObject(jsonData)
                     val tourArr = resObj.getJSONArray("tours")
 
-                    for(i in 0 until tourArr.length()) {
-                        println(tourArr.getJSONObject(i))
-                    }
-
-                    println(tourArr.toString())
-
-                    val gson = Gson()
                     val sType = object: TypeToken<ArrayList<Tour>>(){}.type
                     val tourList = gson.fromJson<ArrayList<Tour>>(tourArr.toString(), sType)
-
-                    for(tour in tourList) {
-                        println(tour)
-                    }
-
 
                     activity?.runOnUiThread{
                         println("-- run on ui thread")

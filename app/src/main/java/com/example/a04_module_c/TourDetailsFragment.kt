@@ -15,12 +15,9 @@ class TourDetailsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-//        return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.tour_details_fragment, container, false)
 
         tourTitle = arguments?.getString("tourTitle")
-        println("-- get argument: " + tourTitle)
         val titleView = view?.findViewById<TextView>(R.id.tourTitle)
         titleView?.text = tourTitle
 
