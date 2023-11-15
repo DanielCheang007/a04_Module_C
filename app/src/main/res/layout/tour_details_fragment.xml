@@ -58,6 +58,11 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"/>
 
+    <Button
+        android:id="@+id/toggleTour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 
 </LinearLayout>

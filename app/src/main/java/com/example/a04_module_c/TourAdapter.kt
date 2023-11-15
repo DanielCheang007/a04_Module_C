@@ -50,6 +50,8 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
             val frag = TourDetailsFragment()
 
             val bundle = Bundle()
+            bundle.putInt("activityId", tour.activityId)
+            bundle.putBoolean("isActive", tour.isActive)
             bundle.putString("activityName", tour.activityName)
             bundle.putLong("activityDate", tour.activityDate.time)
             bundle.putString("activityType", tour.activityType)

@@ -1,19 +1,28 @@
 package com.example.a04_module_c
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import okhttp3.*
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TourDetailsFragment: Fragment() {
-    private var activityName: String? = ""
+    private var activityId: Int? = null
+    private val isActive: Boolean = false
+    private var activityName: String? = null
     private var activityDate: Date? = null
-    private var activityType: String? = ""
-    private var activityDescription: String? = ""
+    private var activityType: String? = null
+    private var activityDescription: String? = null
+
+    private val agent = OkHttpClient()
 
 
     override fun onCreateView(
@@ -22,6 +31,8 @@ class TourDetailsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.tour_details_fragment, container, false)
+
+        activityId = arguments?.getInt("activityId")
 
         activityName = arguments?.getString("activityName")
         view?.findViewById<TextView>(R.id.activityName)?.text = activityName
@@ -40,7 +51,39 @@ class TourDetailsFragment: Fragment() {
         view?.findViewById<TextView>(R.id.activityDescription)?.text = activityDescription
 
 
+        val btn = view.findViewById<Button>(R.id.toggleTour)
+        btn.setOnClickListener {
+            activityId?.let { it1 -> toggleTourActive(it1) }
+        }
+
+
         return view
+    }
+
+    private fun toggleTourActive(activityId: Int) {
+        val url = "http://172.18.20.111/ghmc/public/tour/" + activityId
+
+        // the data that will post to server
+        val requestBody = FormBody.Builder()
+            .add("isActive", (!isActive).toString())
+            .build()
+
+        // wrap the data to a request package
+        val request = Request.Builder()
+            .url(url)
+            .put(requestBody)
+            .build()
+
+        agent.newCall(request)
+            .enqueue(object: Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("-- something wrong")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    println(response)
+                }
+            })
     }
 
 
