@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<TourAdapter.ViewHolder>() {
+    private var sortAsc: Boolean = false
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView = itemView.findViewById<TextView>(R.id.tourName)
@@ -48,6 +49,17 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
 
     override fun getItemCount(): Int {
         return mTours.size
+    }
+
+    public fun sort(){
+        mTours.sortWith(compareBy{ it.activityDate })
+        if (sortAsc) {
+            mTours.reverse()
+            sortAsc = false
+        } else {
+            sortAsc = true
+        }
+        notifyDataSetChanged()
     }
 
     public fun setData(tours: ArrayList<Tour>) {
