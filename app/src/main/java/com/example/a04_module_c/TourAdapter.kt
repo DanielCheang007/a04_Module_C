@@ -35,6 +35,7 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tour: Tour = mTours.get(position)
+
         holder.nameTextView.setText(tour.activityName)
 
         val pattern = "yyyy-MM-dd"
@@ -49,7 +50,10 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
             val frag = TourDetailsFragment()
 
             val bundle = Bundle()
-            bundle.putString("tourTitle", tour.activityName)
+            bundle.putString("activityName", tour.activityName)
+            bundle.putLong("activityDate", tour.activityDate.time)
+            bundle.putString("activityType", tour.activityType)
+            bundle.putString("activityDescription", tour.activityDescription)
             frag.arguments = bundle
 
             val transaction = activity.supportFragmentManager.beginTransaction()
