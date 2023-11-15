@@ -1,12 +1,12 @@
 package com.example.a04_module_c
 
-import android.provider.ContactsContract
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 
 class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<TourAdapter.ViewHolder>() {
 
@@ -26,6 +26,24 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
         val tour: Tour = mTours.get(position)
         holder.nameTextView.setText(tour.activityName)
         holder.dateTextView.setText(tour.activityDate.toString())
+
+        holder.itemView.setOnClickListener {
+            println("-- here: " + tour.activityName)
+
+            val activity = it!!.context as AppCompatActivity
+            val frag = TourDetailsFragment()
+
+            val bundle = Bundle()
+            bundle.putString("tourTitle", tour.activityName)
+            frag.arguments = bundle
+
+            val transaction = activity.supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.rightLayout, frag)
+
+            // allow back to original fragment
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     override fun getItemCount(): Int {

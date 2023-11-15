@@ -7,10 +7,31 @@
     tools:context=".WorkPage">
 
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tourListRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+                <fragment
+                    android:id="@+id/leftFrag"
+                    android:name="com.example.a04_module_c.LeftFragment"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+<!--                <fragment-->
+<!--                    android:id="@+id/rightFrag"-->
+<!--                    android:name="com.example.a04_module_c.RightFragment"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"/>-->
+
+                <FrameLayout
+                    android:id="@+id/rightLayout"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

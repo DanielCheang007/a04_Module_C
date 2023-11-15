@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout-large/activity_work_page.xml" value="0.11687069625095639" />
         <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/activity_work_page.xml" value="0.225" />
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/another_right_fragment.xml" value="0.1038500506585613" />
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/fragment_tour_details.xml" value="0.1094224924012158" />
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/fragment_tour_view.xml" value="0.1094224924012158" />
         <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/item_tour.xml" value="0.37087378640776697" />
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/left_fragment.xml" value="0.2109375" />
+        <entry key="..\:/Users/daniel/AndroidStudioProjects/04_Module_C/app/src/main/res/layout/right_fragment.xml" value="0.21354166666666666" />
       </map>
     </option>
   </component>
