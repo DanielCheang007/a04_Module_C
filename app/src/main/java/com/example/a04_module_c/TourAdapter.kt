@@ -36,7 +36,10 @@ class TourAdapter(private val mTours: ArrayList<Tour>): RecyclerView.Adapter<Tou
         println("-- set data")
         mTours.clear()
         mTours.addAll(tours)
+        mTours.addAll(tours)
+        mTours.addAll(tours)
 
+        println(mTours.size)
         println("-- notify the change")
         notifyDataSetChanged()
     }
