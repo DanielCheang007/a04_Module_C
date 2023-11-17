@@ -35,6 +35,9 @@ class LeftFragment: Fragment() {
         println("---- here")
         println(user)
 
+        val username = view?.findViewById<TextView>(R.id.username)
+        username?.setText(user?.username)
+
         // search tour list
         val searchFiled = view?.findViewById<EditText>(R.id.searchQuery)
         searchFiled?.addTextChangedListener(object: TextWatcher{
