@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.google.gson.Gson
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     private val agent = OkHttpClient()
@@ -61,8 +63,13 @@ class MainActivity : AppCompatActivity() {
 
                         // 查看解析結果中的 validated 是 true / false， false 表示賬號密碼錯誤
                         if (validated) {
-                            val workPage = Intent(this@MainActivity, WorkPage::class.java)
-                            startActivity(workPage)
+                            // 將 json 裡的 user 物件，轉為 kotlin 裡 User 的 instance
+                            val userData = resObj.getJSONObject("user")
+                            val user = Gson().fromJson(userData.toString(), User::class.java)
+
+                            val intent = Intent(this@MainActivity, WorkPageActivity::class.java)
+                            intent.putExtra("user", user as Serializable) // 將 user 傳給 工作頁 activity
+                            startActivity(intent)
                         } else {
                             // onResponse 裡不能直接使用 Toast，必須使用此方法調用 UI Thread 來執行
                             runOnUiThread {

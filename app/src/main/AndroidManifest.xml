@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".WorkPage"
+            android:name=".WorkPageActivity"
             android:screenOrientation="landscape"
             android:exported="false" />
         <activity

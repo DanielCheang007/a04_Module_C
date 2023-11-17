@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.fragment.app.Fragment
 
-class WorkPage : AppCompatActivity() {
+class WorkPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_page)
+
+        // 接收 MainActivity 傳來的 user instance
+        val user: User = intent?.getSerializableExtra("user") as User
+        println(user)
 
         val button = findViewById<Button>(R.id.button2)
         button.setOnClickListener{
