@@ -31,6 +31,10 @@ class LeftFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.left_fragment, container, false)
 
+        val user:User = arguments?.getSerializable("user") as User
+        println("---- here")
+        println(user)
+
         // search tour list
         val searchFiled = view?.findViewById<EditText>(R.id.searchQuery)
         searchFiled?.addTextChangedListener(object: TextWatcher{

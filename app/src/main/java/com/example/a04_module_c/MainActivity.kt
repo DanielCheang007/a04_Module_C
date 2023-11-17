@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                             val userData = resObj.getJSONObject("user")
                             val user = Gson().fromJson(userData.toString(), User::class.java)
 
-                            val intent = Intent(this@MainActivity, WorkPageActivity::class.java)
+                            val intent = Intent(this@MainActivity, MainActivity2::class.java)
                             intent.putExtra("user", user as Serializable) // 將 user 傳給 工作頁 activity
                             startActivity(intent)
                         } else {
