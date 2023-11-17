@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun asyncLogin(username: String, password: String) {
-        val url = "http://172.18.20.111/ghmc/public/login"
+        val url = getString(R.string.api_base) + "/login"
 
         // the data that will post to server
         val requestBody = FormBody.Builder()

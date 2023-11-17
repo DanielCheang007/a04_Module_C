@@ -12,7 +12,7 @@ data class Tour(
     val joinedParticipant: Int,
     val presentNo: Int,
     val absentNo: Int,
-    val isActive: Boolean
+    val isActive: String // in db it is varchar(1) "1" or "0"
 ){
 
 }

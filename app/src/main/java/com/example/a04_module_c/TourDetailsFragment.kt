@@ -16,7 +16,7 @@ import java.util.*
 
 class TourDetailsFragment: Fragment() {
     private var activityId: Int? = null
-    private val isActive: Boolean = false
+    private var isActive: String? = "0"
     private var activityName: String? = null
     private var activityDate: Date? = null
     private var activityType: String? = null
@@ -33,6 +33,7 @@ class TourDetailsFragment: Fragment() {
         val view = inflater.inflate(R.layout.tour_details_fragment, container, false)
 
         activityId = arguments?.getInt("activityId")
+        isActive = arguments?.getString("isActive")
 
         activityName = arguments?.getString("activityName")
         view?.findViewById<TextView>(R.id.activityName)?.text = activityName
@@ -61,11 +62,15 @@ class TourDetailsFragment: Fragment() {
     }
 
     private fun toggleTourActive(activityId: Int) {
-        val url = "http://172.18.20.111/ghmc/public/tour/" + activityId
+        var targetStatus = "1"
+        if (isActive == "1") {
+            targetStatus = "0"
+        }
+        val url = getString(R.string.api_base) + "/tour/" + activityId + "?isActive=" + targetStatus
 
         // the data that will post to server
         val requestBody = FormBody.Builder()
-            .add("isActive", (!isActive).toString())
+//            .add("isActive", "1")
             .build()
 
         // wrap the data to a request package
@@ -81,7 +86,8 @@ class TourDetailsFragment: Fragment() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    println(response)
+                    println(response?.body?.string())
+                    isActive = targetStatus
                 }
             })
     }

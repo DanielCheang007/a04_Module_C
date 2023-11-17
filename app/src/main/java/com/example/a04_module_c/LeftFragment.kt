@@ -69,7 +69,7 @@ class LeftFragment: Fragment() {
     }
 
     private fun getTours() {
-        val url = "http://172.18.20.111/ghmc/public/tour"
+        val url = getString(R.string.api_base) + "/tour"
 
         // the data that will post to server
         val request = Request.Builder()
